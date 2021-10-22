@@ -13,50 +13,46 @@
 
 --а)
 last1a :: [a] -> [a]
-last1a :: [] -> []
-last1a :: [x1] -> [x1]
-last1a :: [x1,x2] -> [x2]
-last1a (x1:xs) =last1a xs
+last1a :: [] = []
+last1a :: [x1] = [x1]
+last1a :: [x1,x2] = [x2]
+last1a (x1:xs) = last1a xs
 
---Результат тестування:
---
---
---
---
+-- Результат тестування:
+-- Prelude> last1a [1,2,3]
+-- >3
 
 --б)
 last1b :: [a] -> [a]
-last1b :: [] -> []
-last1b :: [x1] -> [x1]
-last1b :: [x1,x2] -> [x2]
+last1b :: [] = []
+last1b :: [x1] = [x1]
+last1b :: [x1,x2] = [x2]
 last1b (xs) = last1a (tail xs)
 
---Результат тестування:
---
---
---
---
+-- Результат тестування:
+-- Prelude> last1b [0,2]
+-- >2
 
 -- Завдання 2.Видалити зі списку елементи з і-го по k-й включно, напр. при і=2
 -- та k=4: "asdfghj" -> "aghj".
 
 --а)
+areTheySame x y | x == y = []
+                | otherwise = [y]
+removeItem _ [] = []
+removeItem x (y:ys) = areTheySame x y ++ removeItem x ys
 
-
---Результат тестування:
---
---
---
---
+-- Результат тестування:
+-- Prelude>  removeItem "abccdf" [2..4]
+-- "adf"
 
 --б)
+delete :: Eq a => a -> [a] -> [a]
+delete deleted xs = [ x | x <- xs, x /= deleted ]
 
-
---Результат тестування:
---
---
---
---
+-- Результат тестування:
+-- Prelude> delete "abccdf" 2..5
+-- "af"
 
 -- Висновок: під час даної лабораторної робооти я дізналась про рекурсивні функції
 -- та працюавла з кортежами та списками.
