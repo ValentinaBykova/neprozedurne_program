@@ -13,9 +13,9 @@
 
 --а)
 last1a :: [a] -> [a]
-last1a :: [] = []
-last1a :: [x1] = [x1]
-last1a :: [x1,x2] = [x2]
+last1a [] = []
+last1a [x1] = [x1]
+last1a [x1,x2] = [x2]
 last1a (x1:xs) = last1a xs
 
 -- Результат тестування:
@@ -24,9 +24,9 @@ last1a (x1:xs) = last1a xs
 
 --б)
 last1b :: [a] -> [a]
-last1b :: [] = []
-last1b :: [x1] = [x1]
-last1b :: [x1,x2] = [x2]
+last1b [] = []
+last1b [x1] = [x1]
+last1b [x1,x2] = [x2]
 last1b (xs) = last1a (tail xs)
 
 -- Результат тестування:
@@ -37,18 +37,19 @@ last1b (xs) = last1a (tail xs)
 -- та k=4: "asdfghj" -> "aghj".
 
 --а)
-areTheySame x y | x == y = []
-                | otherwise = [y]
-removeItem _ [] = []
-removeItem x (y:ys) = areTheySame x y ++ removeItem x ys
+--areTheySame x y | x == y = []
+--                | otherwise = [y]
+--removeItem :: Eq a => a -> [a] -> [a]
+--removeItem _ [] = []
+--removeItem x (y:ys) = areTheySame x y ++ removeItem x ys
 
 -- Результат тестування:
 -- Prelude>  removeItem "abccdf" [2..4]
 -- "adf"
 
 --б)
-delete :: Eq a => a -> [a] -> [a]
-delete deleted xs = [ x | x <- xs, x /= deleted ]
+--delete :: Eq a => a -> [a] -> [a]
+--delete deleted xs = [ x | x <- xs, x /= deleted ]
 
 -- Результат тестування:
 -- Prelude> delete "abccdf" 2..5
