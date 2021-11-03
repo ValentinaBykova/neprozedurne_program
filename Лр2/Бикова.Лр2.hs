@@ -55,13 +55,13 @@ slice from to xs = take' (from - 1) xs ++ drop' to xs
 -- [3,4,5]
 
 --б)
-v1 :: Int -> Int -> [a] -> [a]
-v1 a b xs = if a < b then (let(ys,zs) = splitAt a xs in ys ++ tail zs)
-else xs
+v1 :: ([a], Int, Int) -> ([a], Int, Int)
+v1 (xs, a, b) = if a < b then (let(ys,zs) = splitAt a xs in ys ++ tail zs,a,b)
+else (xs,a,b)
 
 -- Результат тестування:
--- Prelude>  v1 1 2 [1,2,3,4,5]
--- [1,3,4,5]
+-- Prelude>  v1 ([1,2,3,4,5], 1,2)
+-- ([1,3,4,5],1,2)
 
 -- Висновок: під час даної лабораторної робооти я дізналась про рекурсивні функції
 -- та працюавла з кортежами та списками.
