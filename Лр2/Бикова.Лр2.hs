@@ -37,23 +37,31 @@ last1b (xs) = last1a (tail xs)
 -- та k=4: "asdfghj" -> "aghj".
 
 --а)
---areTheySame x y | x == y = []
---                | otherwise = [y]
---removeItem :: Eq a => a -> [a] -> [a]
---removeItem _ [] = []
---removeItem x (y:ys) = areTheySame x y ++ removeItem x ys
+drop' :: Int -> [a] -> [a]
+drop' _ []     = []
+drop' 0 xs     = xs
+drop' n (_:xs) = drop' (n-1) xs
+
+take' :: Int -> [a] -> [a]
+take' n _ | n <= 0 = []
+take' _ [] = []
+take' n (x:xs)  =  x : take' (n-1) xs
+
+slice :: Int -> Int -> [a] -> [a]
+slice from to xs = take' (from - 1) xs ++ drop' to xs
 
 -- Результат тестування:
--- Prelude>  removeItem "abccdf" [2..4]
--- "adf"
+-- Prelude>  slice 1 2 [1,2,3,4,5]
+-- [3,4,5]
 
 --б)
---delete :: Eq a => a -> [a] -> [a]
---delete deleted xs = [ x | x <- xs, x /= deleted ]
+v1 :: Int -> Int -> [a] -> [a]
+v1 a b xs = if a < b then (let(ys,zs) = splitAt a xs in ys ++ tail zs)
+else xs
 
 -- Результат тестування:
--- Prelude> delete "abccdf" 2..5
--- "af"
+-- Prelude>  v1 1 2 [1,2,3,4,5]
+-- [1,3,4,5]
 
 -- Висновок: під час даної лабораторної робооти я дізналась про рекурсивні функції
 -- та працюавла з кортежами та списками.
